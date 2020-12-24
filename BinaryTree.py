@@ -37,8 +37,9 @@ class Node():
         #check if node value matches. If not: check left
         if (self.value == search_term):
             return True
-        if (self.left and self.left):
+        if (self.left):
             return self.left.DFS(search_term)
+        print(self.value)
         if (self.right):
             return self.right.DFS(search_term)
         return False
@@ -48,4 +49,13 @@ class Node():
         BFS: Breadth First Search
         '''
         pass
+
+    def recursive_search(self, search_term):
+        if self.value == None or self.value == search_term:
+            return self
+        if search_term < self.value:
+            return(self.left.recursive_search(search_term))
+        if search_term > self.value:
+            return(self.right.recursive_search(search_term))
+
 
