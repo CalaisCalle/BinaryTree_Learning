@@ -6,16 +6,46 @@ class Node():
         self.right = right
 
     def insert(self, value):
-
-        if (not self.value):
-            #value becomes data
+        # Compare the new value with the parent node
+        if self.value:
+            #if parent value exists
+            if value < self.value:
+                if self.left is None:
+                    self.left = Node(value)
+                else:
+                    self.left.insert(value)
+            elif value > self.value:
+                if self.right is None:
+                    self.right = Node(value)
+                else:
+                    self.right.insert(value)
+        else:
             self.value = value
-        elif (not self.left):
-            self.left = Node(value)
-        elif (not self.right):
-            self.right = Node(value)
-        elif (self.right and self.left):
-            self.left.left = Node()
-            self.left.left.insert(value) #oh no
             
+    def PrintTree(self):
+        if self.left:
+            self.left.PrintTree()
+        print(self.value)
+        if self.right:
+            self.right.PrintTree()
+
+    def DFS(self, search_term):
+        '''
+        DFS: Depth First Search
+        For now: returns True if the term is in the tree
+        '''
+        #check if node value matches. If not: check left
+        if (self.value == search_term):
+            return True
+        if (self.left and self.left):
+            return self.left.DFS(search_term)
+        if (self.right):
+            return self.right.DFS(search_term)
+        return False
+
+    def BFS(self, search_term):
+        '''
+        BFS: Breadth First Search
+        '''
+        pass
 
